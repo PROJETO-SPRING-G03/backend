@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
-@Table( name = "tb_categorias")
+@Table( name = "tb_categorias") 
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
