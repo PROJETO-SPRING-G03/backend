@@ -3,6 +3,7 @@ package com.generation.cacique.cacique.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Entity
 @Table( name = "tb_categorias")
