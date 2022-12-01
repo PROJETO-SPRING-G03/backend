@@ -1,5 +1,7 @@
 package com.generation.cacique.cacique.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,6 +31,10 @@ public class Produto {
     private String tamanho;
 
     private String foto;
+
+    @ManyToOne
+    @JsonIgnoreProperties("categoria")
+    private Categoria categoria;
 
     public Long getId() {
         return id;
@@ -76,5 +82,13 @@ public class Produto {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
