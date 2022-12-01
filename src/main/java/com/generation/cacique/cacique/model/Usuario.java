@@ -1,9 +1,12 @@
 package com.generation.cacique.cacique.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -19,7 +22,7 @@ public class Usuario {
 
     @NotBlank(message = "O atributo usuário é obrigatorio e nao pode ser vazio")
     @Size(min = 3, max = 50, message = "O atributo usuário deve conter no mínimo 3 e no máximo 50 caracteres")
-    private String usernaame;
+    private String username;
 
     @Email(message = "o atributo deve ser um email válido")
     private String email;
@@ -29,6 +32,10 @@ public class Usuario {
     private String senha;
 
     private String foto;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("usuario")
+    private List<Produto> produto;
 
     public Long getId() {
         return id;
@@ -46,12 +53,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getUsernaame() {
-        return usernaame;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsernaame(String usernaame) {
-        this.usernaame = usernaame;
+    public void setUsername(String usernaame) {
+        this.username = usernaame;
     }
 
     public String getEmail() {
