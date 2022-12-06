@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -20,12 +21,9 @@ public class Usuario {
     @Size(min = 3, max = 50, message = "O atributo nome deve conter no mínimo 3 e no máximo 50 caracteres")
     private String nome;
 
-    @NotBlank(message = "O atributo usuário é obrigatorio e nao pode ser vazio")
-    @Size(min = 3, max = 50, message = "O atributo usuário deve conter no mínimo 3 e no máximo 50 caracteres")
-    private String username;
-
-    @Email(message = "o atributo deve ser um email válido")
-    private String email;
+    @NotNull
+    @Email(message = "O atributo usuário é obrigatorio e nao pode ser vazio")
+    private String usuario;
 
     @NotBlank(message = "O atributo senha é obrigatorio e nao pode ser vazio")
     @Size(min = 8, message = "O atributo senha deve conter no mínimo 8 caracteres")
@@ -33,8 +31,8 @@ public class Usuario {
 
     private String foto;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("usuario")
+    @OneToMany(mappedBy = "usuarios", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("usuarios")
     private List<Produto> produto;
 
     public Long getId() {
@@ -53,20 +51,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setUsername(String usernaame) {
-        this.username = usernaame;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getSenha() {

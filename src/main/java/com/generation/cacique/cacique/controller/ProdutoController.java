@@ -21,17 +21,13 @@ import java.util.Optional;
 @RequestMapping("/produtos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
     @Autowired
     private ProdutoRepository produtoRepository;
 
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @GetMapping
+    @GetMapping("/listartodos")
     public ResponseEntity<List<Produto>> getAll(){
         return ResponseEntity.ok(produtoRepository.findAll());
     }
@@ -55,12 +51,14 @@ public class ProdutoController {
     public ResponseEntity <List<Produto>> getByPrecoGreater(@PathVariable BigDecimal preco){
         return ResponseEntity.ok(produtoRepository.findAllByPrecoGreaterThan(preco));
     }
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<Produto> post(@Valid @RequestBody Produto produto){
         if (categoriaRepository.existsById(produto.getCategoria().getId()))
             return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produto));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+
     @PutMapping
     public ResponseEntity<Produto> put(@Valid @RequestBody Produto produto){
         if (produtoRepository.existsById(produto.getId())){
