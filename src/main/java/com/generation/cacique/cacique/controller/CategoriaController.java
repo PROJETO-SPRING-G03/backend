@@ -37,8 +37,8 @@ public class CategoriaController {
 
     //LISTAR NOME PRODUTO
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<List<Categoria>> getByTitle(@PathVariable String descricao){
-        return ResponseEntity.ok(categoriaRepository.findAllByNomeContainingIgnoreCase(descricao));
+    public ResponseEntity<List<Categoria>> getByTitle(@PathVariable String nome){
+        return ResponseEntity.ok(categoriaRepository.findAllByNomeContainingIgnoreCase(nome));
 
     }
     //CRIAR CATEGORIA
@@ -51,7 +51,7 @@ public class CategoriaController {
     @PutMapping
     public ResponseEntity<Categoria>put(@Valid @RequestBody Categoria categoria){
         return categoriaRepository.findById(categoria.getId())
-                .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
+                .map(resposta -> ResponseEntity.status(HttpStatus.OK)
                         .body(categoriaRepository.save(categoria)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 
