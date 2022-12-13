@@ -1,6 +1,7 @@
 package com.generation.cacique.cacique.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,8 +22,9 @@ public class Usuario {
     @Size(min = 3, max = 50, message = "O atributo nome deve conter no mínimo 3 e no máximo 50 caracteres")
     private String nome;
 
-    @NotNull
-    @Email(message = "O atributo usuário é obrigatorio e nao pode ser vazio")
+    @Schema(example = "email@email.com.br")
+    @NotNull(message = "O Atributo Usuário é Obrigatório!")
+    @Email(message = "O Atributo Usuário deve ser um email válido!")
     private String usuario;
 
     @NotBlank(message = "O atributo senha é obrigatorio e nao pode ser vazio")
